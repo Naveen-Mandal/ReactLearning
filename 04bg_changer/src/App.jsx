@@ -1,29 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react'
 
 function App() {
   // const [count, setCount] = useState(0)
-  const changeColor =(e)=>{
-   const body = document.querySelector("body")
-    // console.dir(root)
-    console.dir(e);
-    const color = e.target.innerText.toLowerCase();
-    body.style.backgroundColor = color;
-  }
+  const [color, setColor] = useState("white")
+  // const changeColor =(e)=>{
+  //  const body = document.querySelector("body")
+  //   // console.dir(root)
+  //   // console.dir(e);
+  //   const color = e.currentTarget.innerText.toLowerCase();
+  //   body.style.backgroundColor = color;
+  //   console.log("color is: " + color);
+  // }
+
+
   return (
     <>
-     {/* <h1 className='bg-green-400'>hello how are you</h1> */}
+      {/* <h1 className='bg-green-400'>hello how are you</h1> */}
+      <div className="w-full h-screen duration-200"
+        style={{ backgroundColor: color }} >
+        <div className="fixed flex flex-wrap justify-center bottom-12 inset-x-0 px-2" >
+          <div className="flex flex-wrap justify-center shadow-lg bg-white gap-3 px-3 py-2 rounded-xl">
+             <button style={{backgroundColor : "blue"}} className= "shadow-lg outline-none px-4 py-1 rounded-full text-white" onClick={() => { setColor("blue") }} >Blue</button>
+          <button style={{backgroundColor : "green"}} className= "shadow-lg outline-none px-4 py-1 rounded-full text-white" onClick={() => { setColor("green") }}>Green</button>
+          <button style={{backgroundColor : "red"}} className= "shadow-lg outline-none px-4 py-1 rounded-full text-white" onClick={() => { setColor("red") }} >Red</button>
+          <button style={{backgroundColor : "yellow"}} className= "shadow-lg outline-none px-4 py-1 rounded-full text-white" onClick={() => { setColor("yellow") }} >Yellow</button>
+          <button style={{backgroundColor : "orange"}} className= "shadow-lg outline-none px-4 py-1 rounded-full text-white" onClick={() => { setColor("orange") }} >Orange</button>
+          <button style={{backgroundColor : "brown"}} className= "shadow-lg outline-none px-4 py-1 rounded-full text-white" onClick={() => { setColor("brown") }}>Brown</button>
+          <button style={{backgroundColor : "purple"}} className= "shadow-lg outline-none px-4 py-1 rounded-full text-white" onClick={() => { setColor("purple") }} >Purple</button>
+          </div>
+        </div>
 
-     <button onClick={changeColor} className='bg-blue-400'>Blue</button>
-     <button onClick={changeColor} className='bg-green-400'>Green</button>
-     <button onClick={changeColor} className='bg-red-400'>Red</button>
-     <button onClick={changeColor} className='bg-yellow-400'>Yellow</button>
-     <button onClick={changeColor} className='bg-orange-400'>Orange</button>
-     <button onClick={changeColor} className='bg-amber-400'>Brown</button>
-     <button onClick={changeColor} className='bg-purple-400'>Purple</button>
-
+      </div>
     </>
   )
 }
