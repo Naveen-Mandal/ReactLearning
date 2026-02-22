@@ -1,33 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useCallback, useState } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [length, setLength] = useState(8)
+  const [numbersAllowed, setNumbersAllowed] = useState(false)
+  const [charactersAllowed, setCharactersAllowed] = useState(false)
+  const [password, setPassword] = useState("")
+  const passwordGenerator = () => {
+    let str = "";
+    let sr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    if (numbersAllowed) sr += "1234567890";
+    if (charactersAllowed) sr += "{}[]()`~!@#$%^&*><?/:;+=-_";
+    for (let i = 0; i < length; i++) {
+      const r = Math.floor(Math.random() * sr.length + 1);
+      str += sr.charAt(r);
+    }
+    setPassword(str);
+  }
+  const passGenerator = useCallback(passwordGenerator, [length, numbersAllowed, charactersAllowed, setPassword]);
+  //setPassword is used as dependency in useCallbace() hook because it is for optimization. if we don't use it will still work
+  //if we use password in place of setPassword then infinite loop will run because password changes whenever setPassword is called, which recreates the callback again and again
 
+
+  //this password generator will be called when numbersAllowed || charactersAllowed will be selected or unselected. So we have to call password generator whenever numbersAllowed || charactersAllowed will be checked or unchecked thats why using useCallback() hook.
+
+  //useCallback() not stops re-render. It only remembers/memorize the function and reuse it. using useCallback() prevents from creating functions everytime it is called. 
+
+  useEffect(()=>{ passwordGenerator()}, [length, numbersAllowed, charactersAllowed, passGenerator]);
+  //we are using useEffect() hoot because we want to rerun whenever any variable is changed.
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 my-8 text-orange-500 bg-gray-500">
+        <h1 className= "text-white text-center text-xl my-3">Password Generator</h1>
+        <div className="flex shadow rounded-lg overflow-hidden mb-4">
+          <input type="text" value={password} placeholder="Password" className = "outline-none w-full py-1 px-3 " readOnly/>
+          <button className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>Copy</button>
+        </div>
+        <div className='flex text-sm gap-x-2 '>
+          <div className='flex items-center gap-x-1'>
+            <input type="range" min={6} max={100} value={length} className='cursor-pointer' 
+              onChange={(e)=>{setLength(e.target.value)}}
+            />
+            <label>Length:{length}</label>
+          </div>
+          <div className='flex items-center gap-x-1'>
+            <input type="checkbox" id='numberInput' defaultChecked = {numbersAllowed} onChange={()=>{ setNumbersAllowed( (prevNumAllowed) => !prevNumAllowed) }} />
+            <label htmlFor='numberInput'>Numbers</label>
+          </div>
+          <div className='flex items-center gap-x-1'>
+            <input type="checkbox" id='characterInput' defaultChecked ={charactersAllowed} onChange={()=>{ setCharactersAllowed( (prevCharAllowed) => !prevCharAllowed)}}/>
+            <label htmlFor='characterInput'>Characters</label>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
     </>
   )
 }
