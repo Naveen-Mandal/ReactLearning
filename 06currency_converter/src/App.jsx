@@ -4,7 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0) // here useState() is a function which is returning array of size 2 one is variable and second is reference of a function. That is how we will create custom hooks.
+
 
   return (
     <>
