@@ -6,7 +6,7 @@ function Input({
     onAmountChange,
     onCurrencyChange,
     currencyOptions = [],   //we have taken currency as empty array bydefault so that our app will not get crash.
-    selectCurrency = "usd",
+    selectCurrency = "USD",
     amountDisable = false,
     currencyDisable = false,
 

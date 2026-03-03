@@ -1,37 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+
 import './App.css'
+import { useCallback } from 'react';
 
 function App() {
-  // let value = 15;
-  let [value, setCount] = useState(15)
-  function addOne(){
-    // value++;
-    // setCount(value + 1)
-    // setCount(value + 1)
-    // setCount(value + 1)
-    // setCount(value + 1)        //value will not increase 4 times. value will increase only increase one time. Because all are same tasks so in will go in batches and value will increase only one time.
 
-    setCount((prevCount) => prevCount +1)         // setCount((count) => count +1)   any name can be used
-    setCount(prevCount => prevCount+1)
-    setCount(prevCount => prevCount+1)
-    setCount(prevCount => prevCount+1)    //now value will increase 4 times.
+  const [password, setPassword] = useState("");
+  const [numberAllowed, setNumberAllowed] = useState(false);
+  const [charAllowed, setCharAllowed] = useState(false);
+  const [length, setLength ] = useState(8);
 
-    console.log(value);
+  const passGenerator = ()=>{
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    if(numberAllowed) str+= "1234567890";
+    if(charAllowed) str+="{}()[]!@#$%^&*=+";
+    let p = "";
+    for(let i= 0; i<length; i++){
+      const idx = Math.floor(Math.random()*(str.length));
+      p+=str.charAt(idx);
+    }
+    setPassword(p);
   }
-  function minusOne(){
-    value--;
-    setCount(value)
-
-  }
+  const callback = useCallback(passGenerator, [length, numberAllowed, charAllowed, setPassword])
+  const refresh = useEffect(passGenerator, [length, numberAllowed, charAllowed, setPassword]);
 
   return (
     <>
-        <h1>{value}</h1>
-        <button onClick={addOne}>add</button>    
-        <br />
-        <button onClick={minusOne}>minus</button>    
+      <div>
+        <div>
+          <h1>Password Generator</h1>
+          <div>
+            <input type="text"
+              readOnly
+              placeholder='Password'
+              value={password}
+            />
+            <br />
+            <input type="range" min={6} max={100} value={length}  onChange={(e)=>{ setLength(e.target.value)}}/>
+            <label >Length: {length}</label>
+            <input type="checkbox" defaultChecked ={numberAllowed} onClick={()=>{setNumberAllowed(prev => !prev)}} />
+            <input type="checkbox" defaultChecked ={charAllowed} onClick={()=>{setCharAllowed(prev => !prev)}} />
+          </div>
+        </div>
+      </div>
     </>
   )
 }
