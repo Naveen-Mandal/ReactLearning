@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, NavLink} from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 //Link is used in place of <a> tag. In <a> tag the complete page reloads but there is no concept of page reload in react thats why we use Link tag
 //in place of href inside <a> tage to="" is used in Link tag
 //NavLink is also same as Link but with additional features.
@@ -38,9 +38,9 @@ export default function Header() {
                             <li>
                                 <NavLink
                                     to="/"
-                                    className={({isActive}) =>
+                                    className={({ isActive }) =>
                                         `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
-                                        ${isActive? "text-orange-700": "text-gray-700"} hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                        ${isActive ? "text-orange-700" : "text-gray-700"} hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                                     }
                                 >
                                     Home
@@ -48,10 +48,10 @@ export default function Header() {
                             </li>
                             <li>
                                 <NavLink
-                                to= "/about"
-                                    className={({isActive}) =>
+                                    to="/about"
+                                    className={({ isActive }) =>
                                         `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
-                                        ${isActive? "text-orange-700": "text-gray-700"} hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                        ${isActive ? "text-orange-700" : "text-gray-700"} hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                                     }
                                 >
                                     About
@@ -59,17 +59,28 @@ export default function Header() {
                             </li>
                             <li>
                                 <NavLink
-                                to= "/contact"
-                                    className={({isActive}) =>
+                                    to="/contact"
+                                    className={({ isActive }) =>
                                         `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
-                                        ${isActive? "text-orange-700": "text-gray-700"} hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                        ${isActive ? "text-orange-700" : "text-gray-700"} hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                                     }
                                 >
                                     Contact
                                 </NavLink>
                             </li>
-                            
-                            
+                            <li>
+                                <NavLink
+                                    to="/github"
+                                    className={({ isActive }) =>
+                                        `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 
+                                        ${isActive ? "text-orange-700" : "text-gray-700"} hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    Github
+                                </NavLink>
+                            </li>
+
+
                         </ul>
                     </div>
                 </div>

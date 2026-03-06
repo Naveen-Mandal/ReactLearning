@@ -42,9 +42,10 @@ const router = createBrowserRouter(
       <Route path = '/about' element = {<About/>}/>
       <Route path = '/contact' element = {<Contact/>}/>
       <Route path = '/user/:userid' element = {<User/>}/>
-      <Route path = '/github/:username' element = {<Github/>}/>
+      {/* <Route path = '/github/:username' element = {<Github/>}/> */}
       {/* <Route index element = {<Github username = "Naveen-Mandal"/>}/>
       <Route path=':username' element = {<Github/>} /> */}
+      <Route path = '/github' element = {<Github/>}/>
 
     </Route>
   )
