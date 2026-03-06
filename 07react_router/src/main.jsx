@@ -8,7 +8,7 @@ import Home from './components/home/Home.jsx'
 import About from './components/about/About.jsx'
 import Contact from './components/contact/Contact.jsx'
 import User from './components/user/User.jsx'
-import Github from './components/github/Github.jsx'
+import Github, { gitHubInfoLoader } from './components/github/Github.jsx'
 
 
 // const router = createBrowserRouter([
@@ -45,7 +45,14 @@ const router = createBrowserRouter(
       {/* <Route path = '/github/:username' element = {<Github/>}/> */}
       {/* <Route index element = {<Github username = "Naveen-Mandal"/>}/>
       <Route path=':username' element = {<Github/>} /> */}
-      <Route path = '/github' element = {<Github/>}/>
+      <Route
+      // we can also use loader to fetch data before rendering the component
+      // we can call api from here and pass the data to the component as props
+      //loader will call the api when cursor is on the github in header and will kept in cache and when we click on the github link it will render the component with the data from the cache without calling the api again
+      loader = {gitHubInfoLoader}
+       path = '/github' 
+       element = {<Github/>}
+       />
 
     </Route>
   )
